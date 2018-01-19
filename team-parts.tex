@@ -1,0 +1,120 @@
+
+
+\section{INTRODUCTION \& MOTIVATION}
+
+%
+
+%There are five sections in this template, please follow the sections and feel free to add sub-sections. 
+
+%
+
+%In this section, you need to give an introduction of your team's project started with a couple of sentences that introduce your topic to your readers. You do not have to give too much detailed information, but you explain why this project is important.
+
+
+In 2016, Over 2 tons of trash were collected at HsinYue beach in a coast cleaning activity, this program gathered 1700+ volunteers to pick those debris\cite{liberty_times_net}. Globally, this problem has a significant impact on our environment and will continue to grow.
+In order to solve this problem, several shoreline cleaning robots have been designed to handle this situation: 
+(1) Robot Missions.org\cite{robot_missions} - A 3D printed robot platform suitable for remote operation for activities that pose a danger or difficulty for humans in Fig. \ref{figure:robot_missions}. 
+(2) Solarino Beach Cleaner\cite{solarino_beach_cleaner} - A remote-controlled beach cleaning machine able to move both on wet and dry sandy terrain and to remove rubbish and other foreign matter in Fig. \ref{figure:solarino_beach_cleaner}. 
+
+Both solutions are still under the supervision of operators. If we can make the cleaning process being automatically done by robots, what we will earn are a well-maintained environment and an educative instance of robot application.
+This project will focuse on creating a shoreline cleaning robot with autonomous debris picking and navigation abilities. 
+To simplify problem, we'll start from building an in-door cleaning robot, and implement the system on MIT2.12 Mobile Robot in Fig. \ref{figure:mit212mm}. Simulations with gazebo will be firstly established, and we'll carry out certain experiments to evaluate the system performance in the end.
+
+System architecture is built on Robot Operating System (ROS), and the robot perception and control strategy are adapted from vacuum cleaner\cite{neato_botvac}\cite{ElvisRuiz_roomba_ros} and Amazon Picking Challenge\cite{NikolausCorrell_apc_review_1}.
+\section{SYSTEM ARCHITECTURE \& EQUIPMENTS}
+
+\subsection{SYSTEM ARCHITECTURE}
+
+
+\begin{figure}[!t]
+\includegraphics[width=0.7\columnwidth]{Robot_Missions}
+\centering
+\caption{Robot Modules from Robot Missions.org}
+\label{figure:robot_missions}
+\end{figure}
+
+\begin{figure}[!t]
+\includegraphics[width=0.7\columnwidth]{Solarino_Beach_Cleaner}
+\centering
+\caption{Solarino Beach Cleaner}
+\label{figure:solarino_beach_cleaner}
+\end{figure}
+
+\begin{figure}[!t]
+\includegraphics[width=0.7\columnwidth]{robot}
+\centering
+\caption{MIT2.12 Mobile Manipulator}
+\label{figure:mit212mm}
+\end{figure}
+
+\begin{figure*}[!t]
+\includegraphics[width=\textwidth, height=9cm]{FSM_robot}
+\centering
+\caption{Finite State Machine of Beach Clean Robot}
+\label{figure:FSM_robot}
+\end{figure*}
+
+This system is mainly consisted of Raspberry pi 3 for MCU, Robot Car, Robot Arm, a lidar, and an Intel RealSense SR300. This system can be roughly separated into two subsystems, which are for the path planning of Robot Car and motion planning of Robot Arm. To start with the part of Robot Car. Robot Car of this system use SLAM and odometry data from RP\_LIDAR A2 to construct the map surrounded and to locate the target object. 
+
+After that, path planning will be processed and implemented to the system. After Robot Car Reach the location of target object, subsystem of Robot Arm will start the job of picking up the target object. A motion planning for Robot Arm will be applied. 
+
+As long as the Robot Arm grabbed the target object, Robot Car will again start the path planning to reach a fixed destination which the target object should finally be placed. 
+
+Path planning and car moving in the following steps are similar to former steps of finding and reaching the target object. 
+
+Likewise, Dropping the target object at the destination will be similar to grabbing the object, which applied in former steps, too. 
+
+The full Finite State Machine is Shown as Fig. \ref{figure:FSM_robot}.
+
+
+\subsection{EQUIPMENTS}
+
+Equipments of this Project consists of a Raspberry Pi 3 MCU, a Robot Car module including motors and wheels, a multi-axis Robot Arm with a gripper attached, a RP\_LIDAR A2 in Fig. \ref{figure:RP_Lidar_A2}, an Intel Realsense SR30 in Fig. \ref{figure:RealSense_Camera_SR300_SPL}.
+
+\begin{figure}[h]
+\centering
+    \begin{subfigure}[b]{0.4\columnwidth}
+    \includegraphics[width=\textwidth]{RP_Lidar_A2}
+    \caption{RP\_LIDAR\_A2}
+    \label{figure:RP_Lidar_A2}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.4\columnwidth}
+    \includegraphics[width=\textwidth]{RealSense_Camera_SR300_SPL}
+    \caption{Intel Realsense SR300}
+    \label{figure:RealSense_Camera_SR300_SPL}
+    \end{subfigure}
+\caption{Equipped Sensors}
+\label{figure:sensors}
+\end{figure}
+
+
+%\begin{figure}[h]
+%\includegraphics[width=0.7\columnwidth]{Gazebo_Camera}
+%\centering
+%\caption{Picture Taken from Camera in Gazebo}
+%\label{figure:gazebo_camera}
+%\end{figure}
+
+%\begin{figure}[h]
+%\includegraphics[width=0.7\columnwidth]{Slam}
+%\centering
+%\caption{SLAM Mechanism}
+%\label{figure:path_planning_cycle}
+%\end{figure}
+
+
+%\begin{figure}[h]
+%\includegraphics[width=0.7\columnwidth]{Path_Planning_Cycle}
+%\centering
+%\caption{Cyclic Order in Robot Cleaning Path}
+% \label{figure:path_planning_cycle}
+%\end{figure}
+%
+
+%\begin{figure}[h]
+%\includegraphics[width=0.7\columnwidth]{RBO_team}
+%\centering
+%\caption{Point Cloud Segmentation}
+% \label{figure:rbo_team}
+%\end{figure}
+%
